@@ -1,28 +1,15 @@
-library(profvis)
-profvis({
-  data(diamonds, package = "ggplot2")
-  
-  plot(price ~ carat, data = diamonds)
-  m <- lm(price ~ carat, data = diamonds)
-  abline(m, col = "red")
-})
-
-
-
-
-
-
-
+#set up experimental conditions
 animal.folder<-'/Volumes/Tom HD1/runtry/A0015A732'
-channel.names=c('FITC')
+channel.names<-c('FITC')
 setwd(animal.folder)
+#create a folder where filtered images will be put.
 create.output.directory('filtered')
 
 
-
+#we are interested in d3
 filtered<-paste0(animal.folder, '/filtered/d3')
 
-
+#get all files in animal.folder
 files<-list.files(animal.folder, recursive=TRUE, full.names=TRUE)
 #check only for tif images
 subset.tiff<-which( file_ext(files) == 'tif')
@@ -31,7 +18,7 @@ files<-files[subset.tiff]
 run.folder<-dirname(files)
 run.folder<-unique(run.folder)
 
-#allocate variables before going into the for loop
+#allocate variables before going in the for loop
 run.image.index<-numeric()
 run.plate<-character()
 plate.col<-numeric()
